@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: my-nginx
+          image: 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/my-nginx:v1.0.0
+          imagePullPolicy: Always

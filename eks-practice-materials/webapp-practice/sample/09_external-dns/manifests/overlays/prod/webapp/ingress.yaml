@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-ingress
+  namespace: webapp
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    # FIXME: ACMのarnを更新してください
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-1:123456789012:certificate/abcd1234-ab12-ab12-ab12-abcdef123456
+    # FIXME: 設定したいドメインに更新してください
+    external-dns.alpha.kubernetes.io/hostname: example.com
+spec:
+  ingressClassName: alb
+  rules:
+    - host: example.com # FIXME: ドメインを指定
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-service
+                port:
+                  number: 8080
+    - host: sub.example.com # FIXME: ドメインを指定
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-service
+                port:
+                  number: 8080
+

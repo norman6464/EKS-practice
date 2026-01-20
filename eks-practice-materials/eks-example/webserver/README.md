@@ -1,0 +1,34 @@
+# 操作方法
+
+## イメージのビルド
+```sh
+docker build --tag my-nginx:v1.0.0 ./docker
+```
+
+
+## ビルドしたイメージを起動
+```sh
+docker run -p 8080:80 --rm my-nginx:v1.0.0
+```
+
+```
+❯ curl http://localhost:8080
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Hello World!</title>
+</head>
+<body>
+  <div class="bg-gray-50 flex flex-col items-center justify-center min-h-screen space-y-5">
+    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-md text-center">
+      <h1 class="text-3xl font-bold">Sample</h1>
+      <p>Hello World!</p>
+    </div>
+  </div>
+</body>
+</html>
+```
+

@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+  namespace: kustomize-practice
+spec:
+  template:
+    spec:
+      containers:
+        - name: my-nginx
+          image: my-nginx:v1.0.0
+          imagePullPolicy: Never

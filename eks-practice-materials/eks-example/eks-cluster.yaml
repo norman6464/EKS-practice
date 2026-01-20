@@ -1,0 +1,30 @@
+apiVersion: eksctl.io/v1alpha5              # eksctlのAPIバージョン
+kind: ClusterConfig                         # クラスターの設定を定義するリソースの種類
+metadata:
+  name: eks-example                         # クラスターの名前
+  region: ap-northeast-1                    # クラスターが作成されるAWSリージョン
+  version: "1.30"                           # EKSクラスターのKubernetesバージョン
+addonsConfig:
+  autoApplyPodIdentityAssociations: true    # EKS-addons に推奨されるIAMを自動的に設定
+addons:
+  - name: eks-pod-identity-agent            # vpc-cni で Pod Identity を使うため追加
+  - name: vpc-cni                           # 自動的に追加されるアドオンを明示的に指定
+  - name: kube-proxy                        # 自動的に追加されるアドオンを明示的に指定
+  - name: coredns                           # 自動的に追加されるアドオンを明示的に指定
+managedNodeGroups:                          # ノードグループの設定
+  - name: workers                           # ノードグループの名前
+    instanceType: t3.medium                 # ワーカーノードのインスタンスタイプ
+    desiredCapacity: 2                      # ノード数
+#iam:
+#  # 同等のコマンド: eksctl utils associate-iam-oidc-provider --profile admin --region ap-northeast-1 --cluster eks-example --approve
+#  withOIDC: true
+#
+#  # 同等のコマンド: eksctl create iamserviceaccount --profile admin --cluster=eks-example --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::123456789012:policy/AWSLoadBalancerControllerIAMPolicy --override-existing-serviceaccounts --region ap-northeast-1 --approve
+#  serviceAccounts:
+#    - metadata:
+#        name: aws-load-balancer-controller
+#        namespace: kube-system
+#      attachPolicyARNs:
+#        - "arn:aws:iam::123456789012:policy/AWSLoadBalancerControllerIAMPolicy"
+#      roleName: "aws-load-balancer-controller-role"
+

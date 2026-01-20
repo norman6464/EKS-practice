@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  namespace: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: webapp-php
+          image: 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/webapp-php:v1.0.0
+          imagePullPolicy: Always
+        - name: webapp-nginx
+          image: 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/webapp-nginx:v1.0.0
+          imagePullPolicy: Always
