@@ -3,13 +3,13 @@ kind: Ingress
 metadata:
   name: webapp-lb
   namespace: simple-web
-  # annotations:
-  #   alb.ingress.kubernetes.io/scheme: internet-facing
-  #   alb.ingress.kubernetes.io/target-type: ip
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
   labels:
     app: webapp
 spec:
-  # ingressClassName: alb
+  ingressClassName: alb
   rules:
     - http:
         paths:

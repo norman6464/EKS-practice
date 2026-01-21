@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: my-nginx
-          image: nginx:1.25.4-alpine
+          image: 010928196665.dkr.ecr.ap-northeast-1.amazonaws.com/my-nginx:v1.0.0
           imagePullPolicy: Always
       restartPolicy: Always
 
